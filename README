@@ -1,0 +1,20 @@
+attozip - an extremely compact and minimal "zip" (non-)implementation
+          2012 Kieran Clancy <clancy DOT kieran AT gmail>
+
+attozip is an attempt to write the smallest possible POSIX compliant*
+program that can create "zip" files. More than anything it was just a
+fun project, but I thought I'd release the code since others may find
+it useful for embedded projects etc.
+
+features: 0% compression ratio! (that's right. none. by design.)
+          has no user controllable options
+          reasonable error handling, surprisingly
+          cowardly refuses to overwrite existing files
+          very minimal reliance on library functions
+          works on both little/big-endian*
+
+If you do end up using this for something, I'd be interested to hear
+about it from you - drop me an email?  I'm releasing this code under
+the GPLv3 license (see LICENSE file).
+
+* probably
