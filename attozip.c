@@ -85,8 +85,8 @@ static void zip_path(int zip, int dirfd, const char *path) {
     if (S_ISREG(st.st_mode)) {
         zip_file(zip, zpath, in, &st);
         close(in);
+        goto cleanup;
         zpath[zpathlen] = '\0';
-        return;
     }
 
     /* otherwise, only allow directories */
@@ -105,6 +105,9 @@ static void zip_path(int zip, int dirfd, const char *path) {
         zip_path(zip, in, fname);
     }
     closedir(d);
+
+cleanup:
+    zpath[zpathlen] = '\0';
 }
 
 #define zwrite(s,n) do { \
@@ -165,8 +168,8 @@ static void zip_build_directory(int zip) {
     zipindex_t *indp = &zindex;
     d_offset = lseek(zip, 0, SEEK_END);
 
-    zwrite("\x50\x4b\x01\x02\x1e\x03\x0a\x00\x00\x00\x00\x00", 12);
     while (indp->fname) {
+        zwrite("\x50\x4b\x01\x02\x1e\x03\x0a\x00\x00\x00\x00\x00", 12);
         zw32le(indp->time);
         zw32le(indp->crc32);
         zw32le(indp->size);
