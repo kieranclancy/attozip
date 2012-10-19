@@ -44,7 +44,9 @@ static zipindex_t zindex = { 0 };
 int main(int argc, char *argv[]) {
     int zip, i;
 
-    if (argc < 3) xerr("Usage: attozip new.zip file1 ...");
+    if (argc < 3) xerr("Usage: attozip new.zip file1 ...\n"
+                       "       Copyright 2012 Kieran Clancy\n"
+                       "       http://git.io/ZaUszg");
 
     zip = open(argv[1], O_CREAT|O_EXCL|O_RDWR, 0644);
     if (zip < 0) xerr2(argv[1], "could not create or already exists");
