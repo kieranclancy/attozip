@@ -195,14 +195,14 @@ static void zip_build_directory(int zip) {
 
 static void path_add(char *buf, int bufsz, const char *add) {
     char *p;
-    int i, len, exdepth;
+    int len, exdepth;
 
     if (!add) return;
 
     exdepth = (buf[0] == '\0' ? -1 : 0);
 
     while (*add) {
-        while (*add == '/') i++;
+        while (*add == '/') add++;
 
         len = 0;
         while (add[len] != '\0' && add[len] != '/') len++;
