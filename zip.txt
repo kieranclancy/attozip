@@ -1,0 +1,55 @@
+Simple ZIP file
+    file 1
+        signature               <50 4b 03 04>
+        version needed          <0a 00>
+        flags                   <00 00>
+        compression method      <00 00>
+        last mod file time
+            second/2            uint5
+            minute              uint6
+            hour                uint5
+        last mod file date
+            day                 uint5
+            month               uint4
+            year-1980           uint7
+        CRC32                   uint32le     (preconditioned ~0x0)
+                                             (magic 0xdebb20e3)
+        compressed size         uint32le = uncompressed size
+        uncompressed size       uint32le
+        file name length        uint16le
+        extra field length      <00 00>
+        filename
+        data
+    ...
+    central directory
+        file header 1
+            signature               <50 4b 01 02>
+            version made by         <1e 03>
+            version needed          (as above)
+            flags                   (as above)
+            compression method      (as above)
+            file mod time           (as above)
+            file mod date           (as above)
+            CRC32                   (as above)
+            compressed size         (as above)
+            uncompressed size       (as above)
+            file name length        (as above)
+            extra field length      <00 00>
+            file comment length     <00 00>
+            disk number start       <00 00>
+            file type               <00 00>
+            external attributes
+                unused              <00 00>
+                perms in LE         <xx 8x>
+            relative header offset  uint32le (0 for first file)
+            file name
+        ...
+    end of central directory record
+        signature                   <50 4b 05 06>
+        disk number                 <00 00>
+        central dir start disk      <00 00>
+        num entries on this disk    uint16le
+        num entries total           uint16le
+        central dir size            uint32le
+        central dir offset          uint32le
+        comment length              <00 00>
